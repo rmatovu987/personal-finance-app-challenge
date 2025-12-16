@@ -1,31 +1,84 @@
-# Take‑Home: Personal Finance App (1 week)
+# **Finance App – Personal Budgeting & Expense Tracking**
 
-**Goal:** Implement a usable MVP that meets the brief and ships to a live demo.
+A simple personal-finance application built with Ruby on Rails 8, designed to help users manage budgets, track expenses, and visualize spending using charts and dashboards.
 
-## Scope & Requirements
+------------------------------------------------------------------------
 
-- Users can: sign up/sign in; add/edit/delete accounts; record transactions; view balances; filter by category/date; basic charts.
-- Tech: Rails 7/8; Postgres; any front‑end (ERB/Hotwire or React). Tests required.
-- Deliverable: MR using `Project_Submission` template; deploy URL.
+## 🚀 **Live Demo**
 
-## Acceptance Criteria (excerpt)
+The app is deployed on Hetzner using Kamal 2.\
+In addition, a Github Action is set up to continuously deploy the app when changes are pushed to the `feature/finance-app-richard` branch.
 
-- [ ] Auth + session security (CSRF, password rules)
-- [ ] CRUD for accounts & transactions
-- [ ] Category budgets + monthly summary
-- [ ] Accessible UI; mobile responsive
-- [ ] Seed data + README with setup/run/test
+The link is: [https://financetest.senteflow.com](https://financetest.senteflow.com)
 
-# Using the Figma design file
+------------------------------------------------------------------------
 
-Using this design file will help you practice building projects in the same way professionals do. Seeing the details in the design will help you improve your accuracy and build projects faster.
+## 📸 **Screenshots**
 
-[Figma](https://www.figma.com/) is an extremely popular design tool with a generous free tier and support for both Windows and Mac computers.
+The screenshots are found in `docs/screenshots`.
 
-To get started with Figma, [download the correct app for your operating system](https://www.figma.com/downloads/). You can then open the app and open the `.fig` design file by dragging it over the app or using the "import" button.
+![Dashboard](docs/screenshots/dashboard.png)
+![Transactions](docs/screenshots/transactions.png)
+![Budgets](docs/screenshots/budgets.png)
+![Pots](docs/screenshots/pots.png)
+![Recurring Bills](docs/screenshots/bills.png)
+![Successful CI/CD Action](docs/screenshots/ci_cd_github_action.png)
 
-If you're going to use the Desktop App, you don't need to download the Font Installer from the downloads page. But if you're planning on using the Figma web app you should download and install it to ensure the fonts show up correctly.
+------------------------------------------------------------------------
 
-If you haven't used Figma before, we recommend reading our "[Figma for developers: How to work with a design file](https://www.frontendmentor.io/articles/figma-for-developers-how-to-work-with-a-design-file-m6CZKZ1rC1)" article.
+## 📦 **Tech Stack**
 
-We hope you enjoy the challenge! 🙂
+-   Ruby 3.4.5
+-   Rails 8.1.1
+-   PostgreSQL
+-   TailwindCSS
+-   Bun
+-   Rails Auth
+-   RSpec
+-   Solid Queue
+
+------------------------------------------------------------------------
+
+## 🧰 **Setup Instructions**
+
+### Clone repository
+
+``` bash
+git clone https://github.com/trekab/personal-finance-app-challenge.git
+cd personal-finance-app-challenge
+```
+
+### Install dependencies
+
+``` bash
+bundle install
+bun install
+```
+
+### Database setup
+
+``` bash
+bin/rails db:create db:migrate db:seed
+```
+
+### Run app
+
+``` bash
+bin/dev
+```
+
+------------------------------------------------------------------------
+
+## 🧪 **Run Tests**
+
+``` bash
+bundle exec rspec
+bundle exec rspec --format documentation --out spec_report.txt
+```
+
+------------------------------------------------------------------------
+
+## ✍️ Author
+
+Richard F. Matovu\
+Senior Software Engineer
