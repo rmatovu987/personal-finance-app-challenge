@@ -52,14 +52,14 @@ RSpec.describe Budget, type: :model do
       create(:budget, user: user, theme: "Green")
       create(:budget, user: user, theme: "Red")
 
-      expect(Budget.used_themes(nil, user.id)).to match_array(["Green", "Red"])
+      expect(Budget.used_themes(nil, user.id)).to match_array([ "Green", "Red" ])
     end
 
     it "excludes the given budget id" do
       b1 = create(:budget, user: user, theme: "Yellow")
       b2 = create(:budget, user: user, theme: "Purple")
 
-      expect(Budget.used_themes(b1.id, user.id)).to eq(["Purple"])
+      expect(Budget.used_themes(b1.id, user.id)).to eq([ "Purple" ])
     end
   end
 
@@ -77,7 +77,7 @@ RSpec.describe Budget, type: :model do
 
       # If editing b2, only Green remains blocked
       expect(Budget.available_themes(b2.id, user.id))
-        .to match_array(%w[Yellow Cyan Navy Purple Blue Turquoise Orange Pink Grey] + ["Red"]) # Red becomes available for itself
+        .to match_array(%w[Yellow Cyan Navy Purple Blue Turquoise Orange Pink Grey] + [ "Red" ]) # Red becomes available for itself
     end
   end
 

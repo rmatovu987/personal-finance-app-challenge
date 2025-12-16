@@ -26,9 +26,9 @@ class Budget < ApplicationRecord
   def self.available_themes(exclude_id = nil, user_id = nil)
     used_themes = if exclude_id
                        where(user_id: user_id).where.not(id: exclude_id).pluck(:theme)
-                  else
+    else
                     where(user_id: user_id).pluck(:theme)
-                  end
+    end
     THEMES - used_themes
   end
 
@@ -55,5 +55,4 @@ class Budget < ApplicationRecord
   def budget_transactions
     Transaction.where(category: self.category).order(created_at: :desc).limit(3)
   end
-
 end

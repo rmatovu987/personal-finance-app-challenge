@@ -74,13 +74,13 @@ RSpec.describe Pot, type: :model do
 
     it "returns themes not used by the user" do
       expect(Pot.available_themes(nil, user.id)).to match_array(
-                                                      Pot::THEMES - ["Green", "Yellow"]
+                                                      Pot::THEMES - [ "Green", "Yellow" ]
                                                     )
     end
 
     it "excludes a pot when exclude_id is used" do
       expect(Pot.available_themes(pot1.id, user.id)).to match_array(
-                                                          Pot::THEMES - ["Yellow"]
+                                                          Pot::THEMES - [ "Yellow" ]
                                                         )
     end
   end
@@ -90,11 +90,11 @@ RSpec.describe Pot, type: :model do
     let!(:pot2) { create(:pot, user: user, theme: "Cyan") }
 
     it "returns all themes used by the user" do
-      expect(Pot.used_themes(nil, user.id)).to match_array(["Green", "Cyan"])
+      expect(Pot.used_themes(nil, user.id)).to match_array([ "Green", "Cyan" ])
     end
 
     it "excludes a pot when exclude_id is used" do
-      expect(Pot.used_themes(pot2.id, user.id)).to match_array(["Green"])
+      expect(Pot.used_themes(pot2.id, user.id)).to match_array([ "Green" ])
     end
   end
 

@@ -127,5 +127,4 @@ RSpec.describe RecurringBill, type: :model do
       expect(yearly_bill.frequency_display).to eq("Yearly - January 1st")
     end
   end
-
 end

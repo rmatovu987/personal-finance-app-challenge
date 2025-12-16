@@ -1,6 +1,5 @@
 # app/controllers/recurring_bills_controller.rb
 class RecurringBillsController < ApplicationController
-
   def index
     @recurring_bills = current_user.recurring_bills
 
@@ -13,21 +12,21 @@ class RecurringBillsController < ApplicationController
 
     # Apply sorting
     @recurring_bills = case params[:sort]
-                       when 'oldest'
+    when "oldest"
                          @recurring_bills.order(created_at: :asc)
-                       when 'asc'
+    when "asc"
                          @recurring_bills.order(bill_title: :asc)
-                       when 'desc'
+    when "desc"
                          @recurring_bills.order(bill_title: :desc)
-                       when 'highest'
+    when "highest"
                          @recurring_bills.order(amount: :desc)
-                       when 'lowest'
+    when "lowest"
                          @recurring_bills.order(amount: :asc)
-                       when 'due_date'
+    when "due_date"
                          @recurring_bills.by_due_date
-                       else # 'latest' or nil
+    else # 'latest' or nil
                          @recurring_bills.by_latest
-                       end
+    end
 
     # Use instance methods instead of class methods with user_id
     @total_bills = current_user.recurring_bills.sum(:amount)
@@ -44,7 +43,7 @@ class RecurringBillsController < ApplicationController
     @recurring_bill.user = current_user
 
     if @recurring_bill.save
-      redirect_to recurring_bills_path, notice: 'Recurring bill was successfully created.'
+      redirect_to recurring_bills_path, notice: "Recurring bill was successfully created."
     else
       render :new, status: :unprocessable_content
     end

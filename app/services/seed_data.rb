@@ -48,7 +48,7 @@ class SeedData
   end
 
   def create_pots_for_user(user)
-    pot_items = ["New Laptop", "New Car", "New iPhone", "Savings", "Holidays", "Secret Santa", "Build Fund"]
+    pot_items = [ "New Laptop", "New Car", "New iPhone", "Savings", "Holidays", "Secret Santa", "Build Fund" ]
     existing_pots = Pot.where(user: user).pluck(:pot_name, :theme)
     existing_pot_names = existing_pots.map(&:first).to_set
     existing_themes = existing_pots.map(&:last).to_set
@@ -71,7 +71,7 @@ class SeedData
       }
     end
 
-    inserted_pots = Pot.insert_all(pots_to_create, returning: [:id, :target]) if pots_to_create.any?
+    inserted_pots = Pot.insert_all(pots_to_create, returning: [ :id, :target ]) if pots_to_create.any?
 
     # Create transactions for new pots only
     create_pot_transactions(user, inserted_pots) if inserted_pots
@@ -87,23 +87,23 @@ class SeedData
 
       max_transactions.times do
         # Determine what transaction types are valid based on current balance
-        available_types = ['deposit']
-        available_types << 'withdraw' if running_balance > 0
+        available_types = [ "deposit" ]
+        available_types << "withdraw" if running_balance > 0
 
         transaction_type = available_types.sample
 
         # Calculate valid amount range
-        if transaction_type == 'deposit'
+        if transaction_type == "deposit"
           # Can deposit up to remaining target amount
           remaining_target = target - running_balance
-          max_amount = [remaining_target, target / 2].min # Don't fill pot too quickly
+          max_amount = [ remaining_target, target / 2 ].min # Don't fill pot too quickly
           next if max_amount <= 0
           amount = rand(1..max_amount)
         else # withdraw
           # Can only withdraw up to current balance
           max_amount = running_balance
           next if max_amount <= 0
-          amount = rand(1..[max_amount, target / 4].min) # Withdraw smaller amounts
+          amount = rand(1..[ max_amount, target / 4 ].min) # Withdraw smaller amounts
         end
 
         transactions << {
@@ -159,7 +159,7 @@ class SeedData
 
     bills = []
     today = Date.current
-    lists = ["Electricity", "Water", "Groceries", "Rent", "Utilities", "Car Insurance", "Car Repair", "Netflix"]
+    lists = [ "Electricity", "Water", "Groceries", "Rent", "Utilities", "Car Insurance", "Car Repair", "Netflix" ]
 
     lists.each do |list|
       day_of_month = rand(1..28)

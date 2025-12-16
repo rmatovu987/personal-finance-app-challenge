@@ -37,8 +37,8 @@ RSpec.describe Transaction, type: :model do
 
     context "when the search term is blank" do
       it "returns all transactions" do
-        expect(Transaction.search(nil)).to match_array([t1, t2, t3, t4])
-        expect(Transaction.search("")).to match_array([t1, t2, t3, t4])
+        expect(Transaction.search(nil)).to match_array([ t1, t2, t3, t4 ])
+        expect(Transaction.search("")).to match_array([ t1, t2, t3, t4 ])
       end
     end
 
@@ -76,7 +76,7 @@ RSpec.describe Transaction, type: :model do
 
       it "returns all matching records" do
         result = Transaction.search("expense")
-        expect(result).to match_array([t1, another_expense])
+        expect(result).to match_array([ t1, another_expense ])
       end
     end
 

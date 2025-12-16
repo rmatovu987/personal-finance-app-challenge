@@ -43,15 +43,15 @@ class Pot < ApplicationRecord
 
   # Remaining amount to reach target
   def remaining_amount
-    [target - total_saved, 0].max
+    [ target - total_saved, 0 ].max
   end
 
   def self.available_themes(exclude_id = nil, user_id = nil)
     used_themes = if exclude_id
                     where(user_id: user_id).where.not(id: exclude_id).pluck(:theme)
-                  else
+    else
                     where(user_id: user_id).pluck(:theme)
-                  end
+    end
     THEMES - used_themes
   end
 

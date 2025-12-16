@@ -1,5 +1,4 @@
 class TransactionsController < ApplicationController
-
   # GET /transactions or /transactions.json
   def index
     @transactions = current_user.transactions
@@ -9,21 +8,21 @@ class TransactionsController < ApplicationController
 
 
     # Apply category filter
-    if params[:category].present? && params[:category] != 'All'
+    if params[:category].present? && params[:category] != "All"
       @transactions = @transactions.where(category: params[:category])
     end
 
     # Apply sorting
     @transactions = case params[:sort]
-                    when 'oldest'
+    when "oldest"
                       @transactions.order(date: :asc)
-                    when 'highest'
+    when "highest"
                       @transactions.order(amount: :desc)
-                    when 'lowest'
+    when "lowest"
                       @transactions.order(amount: :asc)
-                    else # 'latest' or default
+    else # 'latest' or default
                       @transactions.order(date: :desc)
-                    end
+    end
 
     # Pagination
     @pagy, @transactions = pagy(@transactions, items: 10)

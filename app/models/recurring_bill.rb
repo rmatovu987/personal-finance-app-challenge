@@ -6,7 +6,7 @@ class RecurringBill < ApplicationRecord
   validates :amount, numericality: { greater_than: 0 }
   validates :frequency_type, inclusion: { in: FREQUENCIES }
 
-  validates :day_of_week, presence: true, if: -> { frequency_type == 'Weekly' }
+  validates :day_of_week, presence: true, if: -> { frequency_type == "Weekly" }
   validates :day_of_month, presence: true, if: -> { frequency_type.in?(%w[Monthly Yearly]) }
 
   # Scopes
@@ -44,11 +44,11 @@ class RecurringBill < ApplicationRecord
   # Format the frequency for display (e.g., "Monthly - 1st", "Weekly - Monday")
   def frequency_display
     case frequency_type
-    when 'Monthly'
+    when "Monthly"
       "Monthly - #{day_with_suffix(day_of_month)}"
-    when 'Weekly'
+    when "Weekly"
       "Weekly - #{day_of_week}"
-    when 'Yearly'
+    when "Yearly"
       "Yearly - #{Date::MONTHNAMES[1]} #{day_with_suffix(day_of_month)}"
     end
   end
@@ -59,19 +59,19 @@ class RecurringBill < ApplicationRecord
     today = Date.current
 
     case frequency_type
-    when 'Monthly'
+    when "Monthly"
       # Calculate next occurrence of this day in current or next month
-      next_date = Date.new(today.year, today.month, [day_of_month, Date.civil(today.year, today.month, -1).day].min)
+      next_date = Date.new(today.year, today.month, [ day_of_month, Date.civil(today.year, today.month, -1).day ].min)
       next_date = next_date.next_month if next_date < today
       self.next_due_date = next_date
-    when 'Weekly'
+    when "Weekly"
       # Calculate next occurrence of this day of week
       days_until = (Date::DAYNAMES.index(day_of_week) - today.wday) % 7
       days_until = 7 if days_until == 0 && next_due_date && next_due_date < today
       self.next_due_date = today + days_until
-    when 'Yearly'
+    when "Yearly"
       # Calculate next occurrence of this day/month
-      next_date = Date.new(today.year, 1, [day_of_month, Date.civil(today.year, today.month, -1).day].min)
+      next_date = Date.new(today.year, 1, [ day_of_month, Date.civil(today.year, today.month, -1).day ].min)
       next_date = next_date.next_year if next_date < today
       self.next_due_date = next_date
     end

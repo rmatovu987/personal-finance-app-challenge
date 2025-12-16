@@ -61,7 +61,6 @@ class BudgetsController < ApplicationController
   end
 
   def initiate_delete
-
   end
 
   private
